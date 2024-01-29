@@ -21,28 +21,49 @@
             <div class="row justify-content-center">
                 <div class="col-6 d-flex flex-column mt-4">
 
-                    <h1 class="text-center">Lista delle attività</h1>
+                    <h1 class="text-center">{{message}}</h1>
 
                     <div class="input-group mt-4">
-                        <input type="text" class="form-control" placeholder="Add task..." aria-label="Add task"
-                            aria-describedby="basic-addon2">
-                        <button type="button" class="btn btn-info">Add</button>
+                        <input 
+                        type="text"
+                         class="form-control" 
+                         placeholder="Add task..." 
+                         aria-label="Add task"
+                         aria-describedby="basic-addon2"
+                         v-model="newTask"
+                         @keyUp.enter="addTask"
+                         >
+
+                        <button 
+                        type="button" 
+                        class="btn btn-info"
+                        @click="addTask"
+                        >Add</button>
                     </div>
 
-
-                    <ul class="list-group mt-3">
-
-                        <li class="d-flex justify-content-between">
-                            <span class="flex-grow-1 ms-2 border-bottom border-danger my-2">Task</span>
-                            <i class="fa-solid fa-xmark text-danger ms-2 my-2
-                        "></i>
-                        </li>
-
-                        <li class="list-group-item">
-                            <h4>Non ci sono tasks</h4>
-                        </li>
+                    
+                    <div v-if="tasks.lenght !== 0"
+                    v-for="(element, index) in tasks"
+                    :key="index">
                         
-                    </ul>
+                        <ul class="list-group mt-3">
+    
+                            <li class="d-flex justify-content-between"> 
+
+                                <span class="flex-grow-1 ms-2 border-bottom border-danger my-2">
+                                    {{ element}} </span>
+
+                                <i @click="removeTask(index)" class="fa-solid fa-xmark text-danger ms-2 my-2
+                            "></i>
+                            </li>
+
+                            <span v-else>
+                                <h4>Non ci sono tasks</h4>
+                            </span>
+                        </ul> 
+
+                    </div>
+
 
                 </div>
             </div>
