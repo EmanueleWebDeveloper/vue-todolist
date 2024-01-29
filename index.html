@@ -14,65 +14,54 @@
 </head>
 <body >
 
-    <div  id="app">
+    <div id="app">
 
-        
         <main class="container bg-dark-subtle">
             <div class="row justify-content-center">
                 <div class="col-6 d-flex flex-column mt-4">
 
-                    <h1 class="text-center">{{message}}</h1>
+                    <h1 class="text-center">{{ message }}</h1>
 
                     <div class="input-group mt-4">
                         <input 
-                        type="text"
-                         class="form-control" 
-                         placeholder="Add task..." 
-                         aria-label="Add task"
-                         aria-describedby="basic-addon2"
-                         v-model="newTask"
-                         @keyUp.enter="addTask"
-                         >
+                            type="text"
+                            class="form-control" 
+                            placeholder="Add task..." 
+                            aria-label="Add task"
+                            aria-describedby="basic-addon2"
+                            v-model="newTask"
+                            @keyup.enter="addTask"
+                        >
 
                         <button 
-                        type="button" 
-                        class="btn btn-info"
-                        @click="addTask"
+                            type="button" 
+                            class="btn btn-info"
+                            @click="addTask"
                         >Add</button>
                     </div>
 
-                    
-                    <div v-if="tasks.lenght !== 0"
-                    v-for="(element, index) in tasks"
-                    :key="index">
-                        
+                    <div v-if="tasks.length !== 0" v-for="(element, index) in tasks" :key="index">
                         <ul class="list-group mt-3">
-    
-                            <li class="d-flex justify-content-between"> 
-
-                                <span class="flex-grow-1 ms-2 border-bottom border-danger my-2">
-                                    {{ element}} </span>
-
-                                <i @click="removeTask(index)" class="fa-solid fa-xmark text-danger ms-2 my-2
-                            "></i>
+                            <li class="d-flex justify-content-between">
+                                <i @click="toggleTaskStatus(index)" class="fa-regular fa-square"></i> 
+                                <span class="flex-grow-1 ms-2 border-bottom border-danger my-2"
+                                    :class="{ 'text-decoration-line-through': element.done }">
+                                    {{ element.text }}
+                                </span>
+                                <i @click="removeTask(index)" class="fa-solid fa-xmark text-danger ms-2 my-2"></i>
                             </li>
-
-                            <span v-else>
-                                <h4>Non ci sono tasks</h4>
-                            </span>
-                        </ul> 
-
+                        </ul>
                     </div>
 
+                    <span v-else>
+                        <h4>Non ci sono tasks</h4>
+                    </span>
 
                 </div>
             </div>
         </main>
 
-
-
-
-        </div>
+    </div>
 
     <script src="https://unpkg.com/vue@3"></script>
 
